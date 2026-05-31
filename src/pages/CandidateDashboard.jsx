@@ -4,7 +4,7 @@ import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from 'rec
 import { 
   Briefcase, FileCode, CheckCircle, Clock, Calendar, Sparkles, BookOpen, 
   ChevronRight, User, Settings, Star, Award, Map, Trophy, ArrowUpRight, 
-  Trash2, Mail, Phone, Link2, Plus, FileText, BadgeAlert, PlusCircle, HelpCircle
+  Trash2, Mail, Phone, Link2, Plus, FileText, AlertCircle, PlusCircle, HelpCircle
 } from 'lucide-react';
 import { useAppState } from '../context/AppStateContext';
 import { useToast } from '../context/ToastContext';
@@ -13,21 +13,22 @@ import { TRENDING_SKILLS, ROADMAPS, CERTIFICATIONS } from '../data/mockData';
 export const CandidateDashboard = () => {
   const navigate = useNavigate();
   const { addToast } = useToast();
+  const state = useAppState() || {};
   const { 
-    currentUser, appliedJobIds, savedJobIds, jobs, interviews, 
-    resumeBuilderData, saveResumeBuilderData, toggleSaveJob, applyToJob 
-  } = useAppState();
+    currentUser = {}, appliedJobIds = [], savedJobIds = [], jobs = [], interviews = [], 
+    resumeBuilderData = {}, saveResumeBuilderData = () => {}, toggleSaveJob = () => {}, applyToJob = () => {} 
+  } = state;
 
   const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'builder', 'ats', 'upskill', 'interviews', 'saves'
   
   // Resume Builder local states synced with global context
-  const [personal, setPersonal] = useState(resumeBuilderData.personal);
-  const [education, setEducation] = useState(resumeBuilderData.education);
-  const [techSkills, setTechSkills] = useState(resumeBuilderData.skills.technical.join(', '));
-  const [frameworks, setFrameworks] = useState(resumeBuilderData.skills.frameworks.join(', '));
-  const [experience, setExperience] = useState(resumeBuilderData.experience);
-  const [certifications, setCertifications] = useState(resumeBuilderData.certifications);
-  const [achievements, setAchievements] = useState(resumeBuilderData.achievements);
+  const [personal, setPersonal] = useState(resumeBuilderData?.personal || { name: '', email: '', phone: '', linkedin: '', github: '', portfolio: '' });
+  const [education, setEducation] = useState(resumeBuilderData?.education || { degree: '', college: '', cgpa: '', gradYear: '' });
+  const [techSkills, setTechSkills] = useState(resumeBuilderData?.skills?.technical?.join(', ') || '');
+  const [frameworks, setFrameworks] = useState(resumeBuilderData?.skills?.frameworks?.join(', ') || '');
+  const [experience, setExperience] = useState(resumeBuilderData?.experience || []);
+  const [certifications, setCertifications] = useState(resumeBuilderData?.certifications || []);
+  const [achievements, setAchievements] = useState(resumeBuilderData?.achievements || []);
   
   // Roadmap local select track
   const [selectedTrack, setSelectedTrack] = useState('frontend'); // 'frontend', 'ai'
@@ -66,8 +67,8 @@ export const CandidateDashboard = () => {
       education,
       skills: {
         technical: techSkills.split(',').map(s => s.trim()).filter(Boolean),
-        soft: resumeBuilderData.skills.soft,
-        tools: resumeBuilderData.skills.tools,
+        soft: resumeBuilderData?.skills?.soft || [],
+        tools: resumeBuilderData?.skills?.tools || [],
         frameworks: frameworks.split(',').map(s => s.trim()).filter(Boolean)
       },
       experience,
@@ -665,7 +666,7 @@ export const CandidateDashboard = () => {
               <div className="border border-slate-200/60 dark:border-navy-800/40 bg-white/70 dark:bg-navy-900/40 rounded-3xl p-6 shadow-sm flex flex-col gap-4">
                 <div>
                   <h4 className="text-sm font-bold text-slate-855 dark:text-white flex items-center gap-1.5">
-                    <BadgeAlert className="w-4.5 h-4.5 text-rose-500 animate-pulse" />
+                    <AlertCircle className="w-4.5 h-4.5 text-rose-500 animate-pulse" />
                     Technical Keyword Gap Analysis
                   </h4>
                   <p className="text-[10px] text-slate-400 mt-0.5">Crucial missing keywords requested by leading tech sponsors like Stripe and Google</p>
