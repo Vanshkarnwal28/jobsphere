@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, Eye, EyeOff, User, Terminal, CheckCircle } from 'lucide-react';
+import { Sparkles, Eye, EyeOff, User, Terminal, CheckCircle, ShieldCheck } from 'lucide-react';
 import { useAppState } from '../context/AppStateContext';
 import { useToast } from '../context/ToastContext';
 
@@ -26,11 +26,13 @@ export const AuthPage = () => {
     // Set mock user profile parameters
     setCurrentUser(prev => ({
       ...prev,
-      name: isLogin ? (userRole === 'candidate' ? 'Vansh Karnwal' : 'Olivia Rhye') : name,
+      name: isLogin ? (userRole === 'candidate' ? 'Vansh Karnwal' : userRole === 'recruiter' ? 'Olivia Rhye' : 'Site Administrator') : name,
       email: email,
       avatar: userRole === 'candidate' 
         ? 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150'
-        : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
+        : userRole === 'recruiter'
+        ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
+        : 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150'
     }));
 
     addToast(isLogin ? 'Successfully Authenticated!' : 'Registration Completed!', 'success');
@@ -38,8 +40,10 @@ export const AuthPage = () => {
     // Route appropriately
     if (userRole === 'candidate') {
       navigate('/candidate-dashboard');
-    } else {
+    } else if (userRole === 'recruiter') {
       navigate('/recruiter-dashboard');
+    } else if (userRole === 'admin') {
+      navigate('/admin-dashboard');
     }
   };
 
@@ -47,14 +51,16 @@ export const AuthPage = () => {
     addToast('Authenticated with Google OAuth', 'success');
     setCurrentUser(prev => ({
       ...prev,
-      name: userRole === 'candidate' ? 'Vansh Karnwal' : 'Olivia Rhye',
-      email: userRole === 'candidate' ? 'vansh.karnwal@gmail.com' : 'olivia.rhye@stripe.com'
+      name: userRole === 'candidate' ? 'Vansh Karnwal' : userRole === 'recruiter' ? 'Olivia Rhye' : 'Site Administrator',
+      email: userRole === 'candidate' ? 'vansh.karnwal@gmail.com' : userRole === 'recruiter' ? 'olivia.rhye@stripe.com' : 'admin@hiresphere.ai'
     }));
 
     if (userRole === 'candidate') {
       navigate('/candidate-dashboard');
-    } else {
+    } else if (userRole === 'recruiter') {
       navigate('/recruiter-dashboard');
+    } else if (userRole === 'admin') {
+      navigate('/admin-dashboard');
     }
   };
 
@@ -87,7 +93,7 @@ export const AuthPage = () => {
           {/* Role selection tab buttons */}
           <div className="flex flex-col gap-2">
             <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Select Workspace Role</label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               <button
                 type="button"
                 onClick={() => setUserRole('candidate')}
@@ -99,7 +105,7 @@ export const AuthPage = () => {
               >
                 <User className="w-4 h-4 mb-1 text-brand-500" />
                 <span className="text-xs font-bold">Candidate</span>
-                <span className="text-[9px] text-slate-400">Search opportunities</span>
+                <span className="text-[9px] text-slate-400">Search jobs</span>
               </button>
 
               <button
@@ -113,7 +119,21 @@ export const AuthPage = () => {
               >
                 <Terminal className="w-4 h-4 mb-1 text-indigo-500" />
                 <span className="text-xs font-bold">Recruiter</span>
-                <span className="text-[9px] text-slate-400">Manage candidates</span>
+                <span className="text-[9px] text-slate-400">Find talent</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setUserRole('admin')}
+                className={`p-3 rounded-xl border flex flex-col gap-1 text-left transition-all ${
+                  userRole === 'admin'
+                    ? 'border-brand-500 bg-brand-50/10 text-brand-650 dark:text-brand-400 ring-2 ring-brand-500/10'
+                    : 'border-slate-200 dark:border-navy-800 bg-white/40 dark:bg-navy-900/40 text-slate-500'
+                }`}
+              >
+                <ShieldCheck className="w-4 h-4 mb-1 text-purple-500" />
+                <span className="text-xs font-bold">Admin</span>
+                <span className="text-[9px] text-slate-400">Manage site</span>
               </button>
             </div>
           </div>

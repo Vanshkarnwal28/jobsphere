@@ -19,8 +19,10 @@ export const Navbar = () => {
     setProfileDropdown(false);
     if (role === 'candidate') {
       navigate('/candidate-dashboard');
-    } else {
+    } else if (role === 'recruiter') {
       navigate('/recruiter-dashboard');
+    } else if (role === 'admin') {
+      navigate('/admin-dashboard');
     }
   };
 
@@ -70,11 +72,11 @@ export const Navbar = () => {
         <div className="hidden md:flex items-center gap-4">
           {/* Quick Dashboard link */}
           <Link
-            to={userRole === 'candidate' ? '/candidate-dashboard' : '/recruiter-dashboard'}
+            to={userRole === 'candidate' ? '/candidate-dashboard' : userRole === 'recruiter' ? '/recruiter-dashboard' : '/admin-dashboard'}
             className="text-xs font-semibold px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-navy-800 bg-white/50 dark:bg-navy-900/50 hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors flex items-center gap-1.5"
           >
             <Briefcase className="w-3.5 h-3.5 text-brand-500" />
-            {userRole === 'candidate' ? 'Student Workspace' : 'Recruiter Suite'}
+            {userRole === 'candidate' ? 'Student Workspace' : userRole === 'recruiter' ? 'Recruiter Suite' : 'Admin Console'}
           </Link>
 
           {/* Theme Toggle */}
@@ -120,20 +122,31 @@ export const Navbar = () => {
                   >
                     <span className="flex items-center gap-2 text-slate-750 dark:text-slate-200">
                       <User className="w-4 h-4 text-brand-500" />
-                      Candidate Portal
+                      Student Portal
                     </span>
                     {userRole === 'candidate' && <Check className="w-4 h-4 text-brand-500" />}
                   </button>
 
                   <button
                     onClick={() => handleRoleChange('recruiter')}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors mb-2"
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors mb-1"
                   >
                     <span className="flex items-center gap-2 text-slate-750 dark:text-slate-200">
                       <Terminal className="w-4 h-4 text-indigo-500" />
                       Recruiter Hub
                     </span>
                     {userRole === 'recruiter' && <Check className="w-4 h-4 text-brand-500" />}
+                  </button>
+
+                  <button
+                    onClick={() => handleRoleChange('admin')}
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors mb-2"
+                  >
+                    <span className="flex items-center gap-2 text-slate-750 dark:text-slate-200">
+                      <Briefcase className="w-4 h-4 text-purple-500" />
+                      Admin Console
+                    </span>
+                    {userRole === 'admin' && <Check className="w-4 h-4 text-brand-500" />}
                   </button>
 
                   <button
@@ -190,32 +203,45 @@ export const Navbar = () => {
           <div className="h-px bg-slate-200 dark:bg-navy-800 my-2" />
           <div className="flex flex-col gap-2">
             <p className="text-[10px] uppercase font-bold text-slate-400 px-3 tracking-wider">Select Workspace Role</p>
-            <div className="grid grid-cols-2 gap-2 px-2">
+            <div className="grid grid-cols-3 gap-2 px-2">
               <button
                 onClick={() => {
                   handleRoleChange('candidate');
                   setIsOpen(false);
                 }}
-                className={`py-2 px-3 rounded-xl text-center text-xs font-semibold border ${
+                className={`py-2 px-1 rounded-xl text-center text-[10px] font-semibold border ${
                   userRole === 'candidate'
                     ? 'border-brand-500 text-brand-500 bg-brand-50/20'
                     : 'border-slate-200 dark:border-navy-850'
                 }`}
               >
-                Candidate View
+                Student
               </button>
               <button
                 onClick={() => {
                   handleRoleChange('recruiter');
                   setIsOpen(false);
                 }}
-                className={`py-2 px-3 rounded-xl text-center text-xs font-semibold border ${
+                className={`py-2 px-1 rounded-xl text-center text-[10px] font-semibold border ${
                   userRole === 'recruiter'
                     ? 'border-brand-500 text-brand-500 bg-brand-50/20'
                     : 'border-slate-200 dark:border-navy-850'
                 }`}
               >
-                Recruiter View
+                Recruiter
+              </button>
+              <button
+                onClick={() => {
+                  handleRoleChange('admin');
+                  setIsOpen(false);
+                }}
+                className={`py-2 px-1 rounded-xl text-center text-[10px] font-semibold border ${
+                  userRole === 'admin'
+                    ? 'border-brand-500 text-brand-500 bg-brand-50/20'
+                    : 'border-slate-200 dark:border-navy-850'
+                }`}
+              >
+                Admin
               </button>
             </div>
           </div>

@@ -7,6 +7,7 @@ export const ContactPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [msg, setMsg] = useState('');
+  const [isInquiry, setIsInquiry] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,12 +85,37 @@ export const ContactPage = () => {
         </div>
 
         {/* Right Form Column */}
-        <div className="border border-slate-200/60 dark:border-navy-800/40 bg-white/70 dark:bg-navy-900/40 backdrop-blur-xl rounded-3xl p-6 shadow-sm">
-          <h4 className="text-sm font-bold text-slate-850 dark:text-white mb-4">Send support ticket</h4>
+        <div className="border border-slate-200/60 dark:border-navy-800/40 bg-white/70 dark:bg-navy-900/40 backdrop-blur-xl rounded-3xl p-6 shadow-sm text-left">
+          <div className="flex gap-2 mb-6 border-b border-slate-100 dark:border-navy-900 pb-3">
+            <button
+              onClick={() => { setIsInquiry(false); }}
+              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
+                !isInquiry 
+                  ? 'bg-brand-500 text-white shadow' 
+                  : 'text-slate-500 hover:bg-slate-50 dark:hover:bg-navy-800/40'
+              }`}
+            >
+              Support Ticket
+            </button>
+            <button
+              onClick={() => { setIsInquiry(true); }}
+              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
+                isInquiry 
+                  ? 'bg-brand-500 text-white shadow' 
+                  : 'text-slate-500 hover:bg-slate-50 dark:hover:bg-navy-800/40'
+              }`}
+            >
+              Business Inquiry
+            </button>
+          </div>
+
+          <h4 className="text-sm font-bold text-slate-850 dark:text-white mb-4">
+            {isInquiry ? 'Recruiter Business Sourcing Inquiry' : 'Send Support Ticket'}
+          </h4>
           
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Your Name</label>
+              <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Contact Name</label>
               <input
                 type="text"
                 placeholder="e.g. Alex Rivera"
@@ -101,7 +127,7 @@ export const ContactPage = () => {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Your Email</label>
+              <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Email Address</label>
               <input
                 type="email"
                 placeholder="you@domain.com"
@@ -112,10 +138,37 @@ export const ContactPage = () => {
               />
             </div>
 
+            {isInquiry && (
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Company Name</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Stripe"
+                    className="p-3 bg-slate-50/50 dark:bg-navy-950/40 border border-slate-200 dark:border-navy-800/50 rounded-xl focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 text-xs text-slate-800 dark:text-slate-200 outline-none"
+                    required
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Sourcing Needs</label>
+                  <select
+                    className="p-3 bg-slate-50/50 dark:bg-navy-950/40 border border-slate-200 dark:border-navy-800/50 rounded-xl text-xs text-slate-700 dark:text-slate-200 focus:border-brand-500"
+                    required
+                  >
+                    <option>SaaS Gold Sourcing Plan</option>
+                    <option>SaaS Platinum Sourcing Plan</option>
+                    <option>SaaS Custom Diamond Enterprise</option>
+                  </select>
+                </div>
+              </div>
+            )}
+
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Message</label>
+              <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                {isInquiry ? 'Inquiry Details' : 'Message details'}
+              </label>
               <textarea
-                placeholder="Type your inquiry details here..."
+                placeholder={isInquiry ? "Describe your enterprise team sizes, custom sourcing integrations, and candidate volumes..." : "Type your support request or bug details here..."}
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
                 rows="4"
@@ -126,10 +179,10 @@ export const ContactPage = () => {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md shadow-brand-500/10 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-1.5"
+              className="w-full py-3.5 rounded-2xl bg-brand-650 hover:bg-brand-700 text-white font-bold text-xs shadow-md shadow-brand-500/10 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-1.5"
             >
               <Send className="w-3.5 h-3.5" />
-              Succeed Ticket
+              {isInquiry ? 'Submit Business Inquiry' : 'Submit Support Ticket'}
             </button>
           </form>
         </div>

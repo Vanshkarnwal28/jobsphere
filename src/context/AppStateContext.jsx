@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { JOBS, OPPORTUNITIES, FEED_POSTS, CANDIDATES } from '../data/mockData';
+import { JOBS, OPPORTUNITIES, FEED_POSTS, CANDIDATES, TRENDING_SKILLS, ROADMAPS, CERTIFICATIONS } from '../data/mockData';
 
 const AppStateContext = createContext();
 
@@ -33,6 +33,69 @@ export const AppStateProvider = ({ children }) => {
   const [chatbotMessages, setChatbotMessages] = useState([
     { id: 'msg-1', sender: 'ai', text: 'Hi! I am SphereAI, your recruiting assistant. How can I help you find your dream opportunity today?' }
   ]);
+
+  // Subscription and Verified States
+  const [subscriptionTier, setSubscriptionTier] = useState('free');
+  
+  // Pending jobs queue for Admin review
+  const [pendingJobs, setPendingJobs] = useState([
+    {
+      id: "pending-1",
+      title: "Senior Product Architect",
+      company: "Netflix",
+      logo: "N",
+      salary: "$190,000 - $230,000",
+      skills: ["React", "Node.js", "GraphQL", "AWS"],
+      location: "Los Gatos, CA (Remote)",
+      department: "Engineering",
+      experience: "6+ Years",
+      aiMatch: 85,
+      postedTime: "Just now",
+      description: "We are seeking a senior systems engineer to guide our cloud user interface infrastructure team.",
+      responsibilities: ["Lead engineering designs for millions of streaming clients", "Collaborate with platform teams"],
+      recruiter: { name: "Sarah Connor", role: "Principal Talent Acquisition", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150" }
+    }
+  ]);
+  
+  const [verifiedCompanies, setVerifiedCompanies] = useState(['Google', 'Stripe', 'Linear', 'Meta']);
+  
+  // Resume Builder Data
+  const [resumeBuilderData, setResumeBuilderData] = useState({
+    personal: {
+      name: "Vansh Karnwal",
+      email: "vansh.karnwal@gmail.com",
+      phone: "+1 (555) 019-2834",
+      linkedin: "linkedin.com/in/vanshkarnwal",
+      github: "github.com/vanshkarnwal",
+      portfolio: "vanshk.dev"
+    },
+    education: {
+      degree: "B.S. in Computer Science",
+      college: "Stanford University",
+      cgpa: "3.91/4.0",
+      gradYear: "2026"
+    },
+    skills: {
+      technical: ["React", "JavaScript", "HTML/CSS", "Git"],
+      soft: ["Problem Solving", "Team Leadership", "Written Communication"],
+      tools: ["VS Code", "Figma"],
+      frameworks: ["Vite", "TailwindCSS", "Node.js"]
+    },
+    experience: [
+      {
+        role: "Frontend Engineering Intern",
+        company: "Stripe",
+        duration: "June 2025 - August 2025",
+        desc: "Designed responsive dashboard analytics modules using React & Recharts. Optimized load metrics resulting in 22% improvement in LCP."
+      }
+    ],
+    certifications: [
+      { name: "Meta Frontend Developer Certificate", issuer: "Meta", year: "2025" }
+    ],
+    achievements: [
+      { name: "1st Place, Google Cloud Hackathon 2025", details: "Built cloud-based automated screening assistance prototype using multi-agent triggers." }
+    ]
+  });
 
   // Persist User Role
   useEffect(() => {
@@ -165,6 +228,10 @@ export const AppStateProvider = ({ children }) => {
         aiText = "Check the 'Opportunities' page to view hackathons, mentorship sessions, and competitive challenges sponsored by Vercel, Stripe, and Google!";
       } else if (query.includes('recruiter') || query.includes('pipeline')) {
         aiText = "Switch your profile to Recruiter using the profile dropdown or login panel to view applicant dashboards, drag-and-drop pipeline pipelines, and scheduling systems.";
+      } else if (query.includes('admin') || query.includes('approve') || query.includes('system') || query.includes('console')) {
+        aiText = "As an Admin, you can approve recruiter jobs, verify company credentials, monitor AI accuracy, and view revenue analytics in the Admin Command Console.";
+      } else if (query.includes('upskill') || query.includes('learn') || query.includes('roadmap') || query.includes('course') || query.includes('certification')) {
+        aiText = "We offer custom-tailored upskilling roadmaps (Frontend Development & AI Engineering) in your Student Dashboard! Plus, we recommend premium courses and IIT certifications to bridge skill gaps.";
       }
 
       setChatbotMessages(prev => [...prev, { id: `chat-ai-${Date.now()}`, sender: 'ai', text: aiText }]);
@@ -192,6 +259,60 @@ export const AppStateProvider = ({ children }) => {
     }));
   };
 
+  const upgradeSubscription = (tier) => {
+    setSubscriptionTier(tier);
+  };
+
+  const addPendingJob = (job) => {
+    const newJob = {
+      ...job,
+      id: `pending-${Date.now()}`,
+      postedTime: "Just now",
+      aiMatch: Math.floor(Math.random() * 30) + 70 // Mock AI match score
+    };
+    setPendingJobs(prev => [...prev, newJob]);
+  };
+
+  const approveJob = (jobId) => {
+    const jobToApprove = pendingJobs.find(j => j.id === jobId);
+    if (!jobToApprove) return;
+    
+    // Move to active jobs
+    const approvedJob = {
+      ...jobToApprove,
+      id: `job-${Date.now()}` // assign clean job ID
+    };
+    setJobs(prev => [approvedJob, ...prev]);
+    setPendingJobs(prev => prev.filter(j => j.id !== jobId));
+  };
+
+  const rejectJob = (jobId) => {
+    setPendingJobs(prev => prev.filter(j => j.id !== jobId));
+  };
+
+  const toggleCompanyVerification = (companyName) => {
+    setVerifiedCompanies(prev => 
+      prev.includes(companyName) 
+        ? prev.filter(c => c !== companyName) 
+        : [...prev, companyName]
+    );
+  };
+
+  const saveResumeBuilderData = (data) => {
+    setResumeBuilderData(data);
+    
+    // Automatically compile into a scanned resume profile in context!
+    const allSkills = [
+      ...(data.skills?.technical || []),
+      ...(data.skills?.frameworks || [])
+    ];
+
+    // Compute an ATS score based on skills count
+    const score = Math.min(65 + allSkills.length * 4, 98);
+    
+    uploadAndAnalyzeResume(`${data.personal?.name?.toLowerCase().replace(" ", "_") || "user"}_resume.pdf`, score);
+  };
+
   return (
     <AppStateContext.Provider value={{
       userRole,
@@ -214,7 +335,17 @@ export const AppStateProvider = ({ children }) => {
       updateCandidateStage,
       scheduleInterview,
       sendChatbotMessage,
-      uploadAndAnalyzeResume
+      uploadAndAnalyzeResume,
+      subscriptionTier,
+      upgradeSubscription,
+      pendingJobs,
+      addPendingJob,
+      approveJob,
+      rejectJob,
+      verifiedCompanies,
+      toggleCompanyVerification,
+      resumeBuilderData,
+      saveResumeBuilderData
     }}>
       {children}
     </AppStateContext.Provider>

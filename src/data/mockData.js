@@ -351,3 +351,49 @@ export const CANDIDATES = [
     resumeUrl: "li_wei_go.pdf"
   }
 ];
+
+export const TRENDING_SKILLS = [
+  { id: "ts-1", name: "AI Engineering", growth: 145, demand: "Critical", salary: "$165,000", companies: ["Google", "OpenAI", "Meta"] },
+  { id: "ts-2", name: "Generative AI", growth: 180, demand: "Critical", salary: "$175,000", companies: ["Anthropic", "Stripe", "Microsoft"] },
+  { id: "ts-3", name: "Prompt Engineering", growth: 95, demand: "High", salary: "$120,000", companies: ["Scale AI", "Meta", "Copy.ai"] },
+  { id: "ts-4", name: "DevOps & SRE", growth: 42, demand: "High", salary: "$140,000", companies: ["Netflix", "Vercel", "Apple"] },
+  { id: "ts-5", name: "Full Stack Development", growth: 38, demand: "High", salary: "$130,000", companies: ["Stripe", "Linear", "Airbnb"] },
+  { id: "ts-6", name: "UI/UX Design", growth: 25, demand: "Medium", salary: "$115,000", companies: ["Linear", "Figma", "Apple"] },
+  { id: "ts-7", name: "Cloud Computing", growth: 50, demand: "High", salary: "$135,000", companies: ["AWS", "Google", "Azure"] },
+  { id: "ts-8", name: "Cyber Security", growth: 65, demand: "Critical", salary: "$145,000", companies: ["CrowdStrike", "Cloudflare", "Palantir"] }
+];
+
+export const ROADMAPS = {
+  frontend: {
+    title: "Premium Frontend Engineer",
+    description: "Learn HTML/CSS fundamentals, Master JavaScript, Dive deep into React, Next.js, and advanced styling with Framer Motion.",
+    steps: [
+      { id: "f-1", title: "Web Basics", desc: "HTML5 semantic syntax, CSS Flexbox & Grid layouts, and responsive media queries.", completed: true },
+      { id: "f-2", title: "Modern JavaScript", desc: "ES6 syntax, asynchronous fetches, promises, closures, and modular code structures.", completed: true },
+      { id: "f-3", title: "React Architecture", desc: "React Hooks, Context API, state machines, virtual DOM rendering performance, and key triggers.", completed: true },
+      { id: "f-4", title: "Next.js Core Concepts", desc: "App Router, SSR (Server-Side Rendering), SSG, routing optimizations, API handlers, and Server Actions.", completed: false },
+      { id: "f-5", title: "Framer Motion & Tailwind", desc: "Beautiful layout view transitions, hover micro-interactions, hardware acceleration, and glassmorphism styling.", completed: false },
+      { id: "f-6", title: "Web Performance & SEO", desc: "Core Web Vitals optimization (LCP, INP, CLS), semantic HTML, schema data, and bundle size reduction.", completed: false }
+    ]
+  },
+  ai: {
+    title: "AI & Prompt Engineer",
+    description: "Master Python fundamentals, explore PyTorch frameworks, learn LLM fine-tuning APIs, and practice advanced prompt patterns.",
+    steps: [
+      { id: "a-1", title: "Python & Analytics", desc: "Core Python algorithms, NumPy matrices, Pandas dataframes, and descriptive plots.", completed: true },
+      { id: "a-2", title: "Machine Learning Foundations", desc: "Supervised and unsupervised models, loss gradients, regression, and tree classifiers.", completed: false },
+      { id: "a-3", title: "Deep Learning (PyTorch)", desc: "Building neural networks, backward propagation, neural weights initialization, and model fitting.", completed: false },
+      { id: "a-4", title: "Transformers & LLMs", desc: "Attention mechanisms, GPT architectures, HuggingFace model hubs, and weight loadings.", completed: false },
+      { id: "a-5", title: "Prompt Optimization", desc: "Few-shot templates, Chain-of-Thought (CoT), Retrieval Augmented Generation (RAG) structures.", completed: false },
+      { id: "a-6", title: "MLOps Deployment", desc: "Deploying inference models, scaling Docker containers, Kubernetes scheduling, and API serving.", completed: false }
+    ]
+  }
+};
+
+export const CERTIFICATIONS = [
+  { id: "cert-1", name: "AWS Certified Cloud Practitioner", provider: "Amazon Web Services", duration: "12 Hours", level: "Beginner", rating: 4.8 },
+  { id: "cert-2", name: "Google UX Design Professional Certificate", provider: "Google", duration: "48 Hours", level: "Intermediate", rating: 4.9 },
+  { id: "cert-3", name: "Meta Frontend Developer Professional Certificate", provider: "Meta", duration: "32 Hours", level: "Beginner", rating: 4.7 },
+  { id: "cert-4", name: "Generative AI Fundamentals", provider: "DeepLearning.AI", duration: "8 Hours", level: "Intermediate", rating: 4.9 }
+];
+

@@ -10,6 +10,7 @@ import { LandingPage } from './pages/LandingPage';
 import { AuthPage } from './pages/AuthPage';
 import { CandidateDashboard } from './pages/CandidateDashboard';
 import { RecruiterDashboard } from './pages/RecruiterDashboard';
+import { AdminDashboard } from './pages/AdminDashboard';
 import { JobListingPage } from './pages/JobListingPage';
 import { JobDetailsPage } from './pages/JobDetailsPage';
 import { ResumeAnalyzerPage } from './pages/ResumeAnalyzerPage';
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/feed" element={<FeedPage />} />
                 <Route path="/candidate-dashboard" element={<CandidateDashboard />} />
                 <Route path="/recruiter-dashboard" element={<RecruiterDashboard />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="*" element={<NotFoundPage />} />
