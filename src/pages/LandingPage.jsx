@@ -25,21 +25,8 @@ export const LandingPage = () => {
 
   const handleQuickLogin = (role) => {
     setUserRole(role);
-    setCurrentUser(prev => ({
-      ...prev,
-      name: role === 'candidate' ? 'Vansh Karnwal' : role === 'recruiter' ? 'Olivia Rhye' : 'Site Administrator',
-      email: role === 'candidate' ? 'vansh.karnwal@gmail.com' : role === 'recruiter' ? 'olivia.rhye@stripe.com' : 'admin@hiresphere.ai',
-      avatar: role === 'candidate' 
-        ? 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150' 
-        : role === 'recruiter' 
-        ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
-        : 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150'
-    }));
-    addToast(`Authenticated as ${role === 'candidate' ? 'Student' : role === 'recruiter' ? 'Recruiter' : 'Admin'}!`, 'success');
-    
-    if (role === 'candidate') navigate('/candidate-dashboard');
-    else if (role === 'recruiter') navigate('/recruiter-dashboard');
-    else if (role === 'admin') navigate('/admin-dashboard');
+    addToast(`Selected ${role === 'candidate' ? 'Student' : role === 'recruiter' ? 'Recruiter' : 'Admin'} Portal. Please sign in to proceed!`, 'info');
+    navigate('/auth');
   };
 
   const handleCheckoutSubmit = (e) => {
