@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 import { 
-  ShieldCheck, Users, Briefcase, DollarSign, Activity, Sparkles, CheckCircle2, 
+  ShieldCheck, Users, Briefcase, IndianRupee, Activity, Sparkles, CheckCircle2, 
   XCircle, Clock, ShieldAlert, Cpu, HardDrive, RefreshCw, Star, Landmark
 } from 'lucide-react';
 import { useAppState } from '../context/AppStateContext';
@@ -32,11 +32,11 @@ export const AdminDashboard = () => {
   
   // Recharts Mock Billing Data
   const revenueData = [
-    { month: 'Jan', gold: 1200, platinum: 2400, diamond: 3800 },
-    { month: 'Feb', gold: 1500, platinum: 2800, diamond: 4200 },
-    { month: 'Mar', gold: 1800, platinum: 3500, diamond: 5100 },
-    { month: 'Apr', gold: 2400, platinum: 4100, diamond: 6200 },
-    { month: 'May', gold: 3100, platinum: 5600, diamond: 8400 }
+    { month: 'Jan', gold: 102000, platinum: 204000, diamond: 323000 },
+    { month: 'Feb', gold: 127500, platinum: 238000, diamond: 357000 },
+    { month: 'Mar', gold: 153000, platinum: 297500, diamond: 433500 },
+    { month: 'Apr', gold: 204000, platinum: 348500, diamond: 527000 },
+    { month: 'May', gold: 263500, platinum: 476000, diamond: 714000 }
   ];
 
   // Pie chart for tier distribution
@@ -104,7 +104,7 @@ export const AdminDashboard = () => {
           { label: "Active Talent Pool", value: totalStudents, icon: Users, color: "from-blue-500/10 to-indigo-500/10 text-blue-500" },
           { label: "Verified Employers", value: activeSponsors, icon: ShieldCheck, color: "from-emerald-500/10 to-teal-500/10 text-emerald-555" },
           { label: "Live Listings", value: approvedJobsCount, icon: Briefcase, color: "from-purple-500/10 to-pink-500/10 text-purple-500" },
-          { label: "MRR Growth", value: "$17,100", icon: DollarSign, color: "from-amber-500/10 to-orange-500/10 text-amber-500" }
+          { label: "MRR Growth", value: "₹14,53,500", icon: IndianRupee, color: "from-amber-500/10 to-orange-500/10 text-amber-500" }
         ].map((stat, idx) => {
           const Icon = stat.icon;
           return (
@@ -238,7 +238,7 @@ export const AdminDashboard = () => {
 
               <div className="border border-slate-150 dark:border-navy-850 bg-slate-50/50 dark:bg-navy-950/40 rounded-2xl p-4 flex flex-col gap-2">
                 <h5 className="text-[11px] font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1"><Landmark className="w-3.5 h-3.5 text-brand-500" /> Platform Total Funds</h5>
-                <p className="text-2xl font-extrabold text-slate-850 dark:text-white">$84,320.00</p>
+                <p className="text-2xl font-extrabold text-slate-850 dark:text-white">₹71,67,200.00</p>
                 <span className="text-[9px] font-bold text-emerald-555 flex items-center gap-0.5">▲ +18.4% MRR Growth rate</span>
               </div>
             </div>

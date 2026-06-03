@@ -40,7 +40,7 @@ export const LandingPage = () => {
     {
       tier: 'gold',
       name: 'Gold Plan',
-      price: 19,
+      price: 1599,
       badge: 'Starter',
       color: 'border-slate-200 dark:border-navy-800 bg-white/40 dark:bg-navy-900/40',
       textColor: 'text-slate-800 dark:text-white',
@@ -56,10 +56,10 @@ export const LandingPage = () => {
     {
       tier: 'platinum',
       name: 'Platinum Plan',
-      price: 49,
+      price: 3999,
       badge: 'Popular',
       color: 'border-brand-500 bg-gradient-to-tr from-brand-500/5 to-indigo-500/5 dark:from-brand-500/10 dark:to-indigo-500/10 scale-105 ring-2 ring-brand-500/20',
-      textColor: 'text-slate-850 dark:text-white',
+      textColor: 'text-slate-855 dark:text-white',
       accentColor: 'text-brand-500',
       bullets: [
         "Everything in Gold Included",
@@ -73,10 +73,10 @@ export const LandingPage = () => {
     {
       tier: 'diamond',
       name: 'Diamond Plan',
-      price: 99,
+      price: 7999,
       badge: 'Premium',
       color: 'border-cyan-500 bg-gradient-to-tr from-cyan-500/5 to-blue-500/5 dark:from-cyan-500/10 dark:to-blue-500/10',
-      textColor: 'text-slate-850 dark:text-white',
+      textColor: 'text-slate-855 dark:text-white',
       accentColor: 'text-cyan-500',
       bullets: [
         "Everything in Platinum Included",
@@ -186,7 +186,7 @@ export const LandingPage = () => {
               {[
                 { role: 'candidate', label: 'Student / Candidate Portal', desc: 'Build resumes, upskill, track jobs', color: 'border-blue-200 hover:border-blue-500 bg-blue-500/5 hover:bg-blue-500/10 text-blue-600' },
                 { role: 'recruiter', label: 'Recruiter Management Suite', desc: 'Post openings, compare talent, drag Kanban', color: 'border-emerald-200 hover:border-emerald-500 bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-600' },
-                { role: 'admin', label: 'Admin Command Console', desc: 'Approve jobs, verify partners, audit compute', color: 'border-purple-200 hover:border-purple-500 bg-purple-500/5 hover:bg-purple-500/10 text-purple-600' }
+                { role: 'admin', label: 'Admin Command Console', desc: 'Approve jobs, verify partners, audit compute', color: 'border-purple-200 hover:border-purple-500 bg-purple-500/5 hover:purple-500/10 text-purple-600' }
               ].map(opt => (
                 <button
                   key={opt.role}
@@ -385,7 +385,7 @@ export const LandingPage = () => {
                   <div>
                     <h3 className={`text-lg font-bold ${plan.textColor}`}>{plan.name}</h3>
                     <div className="flex items-baseline gap-1 mt-2">
-                      <span className="text-3xl sm:text-4xl font-extrabold text-slate-850 dark:text-white">${displayPrice}</span>
+                      <span className="text-3xl sm:text-4xl font-extrabold text-slate-855 dark:text-white">₹{displayPrice}</span>
                       <span className="text-xs text-slate-400">/ {isAnnual ? 'year' : 'month'}</span>
                     </div>
                   </div>
@@ -472,7 +472,7 @@ export const LandingPage = () => {
                 </div>
                 <div className="text-right">
                   <p className="text-[9px] uppercase font-bold text-slate-400">Total charge</p>
-                  <p className="text-xl font-extrabold text-indigo-500 mt-0.5">${checkoutPlan.price}</p>
+                  <p className="text-xl font-extrabold text-indigo-500 mt-0.5">₹{checkoutPlan.price}</p>
                   <p className="text-[8px] text-slate-400">/{isAnnual ? 'yearly' : 'monthly'}</p>
                 </div>
               </div>
@@ -528,7 +528,7 @@ export const LandingPage = () => {
                   className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md shadow-indigo-500/10 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 mt-2"
                 >
                   <ShieldCheck className="w-4 h-4 text-white animate-pulse" />
-                  Pay Mock Sourcing Fee of ${checkoutPlan.price}
+                  Pay Mock Sourcing Fee of ₹{checkoutPlan.price}
                 </button>
               </form>
 
