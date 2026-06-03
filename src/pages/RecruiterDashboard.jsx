@@ -24,7 +24,7 @@ export const RecruiterDashboard = () => {
 
   // Post Job State
   const [jobTitle, setJobTitle] = useState('');
-  const [jobSalary, setJobSalary] = useState('$130,000 - $160,000');
+  const [jobSalary, setJobSalary] = useState('₹13,00,000 - ₹16,00,000');
   const [jobLocation, setJobLocation] = useState('Remote (Hybrid)');
   const [jobDept, setJobDept] = useState('Engineering');
   const [jobExp, setJobExp] = useState('3+ Years');
@@ -520,7 +520,7 @@ export const RecruiterDashboard = () => {
                 <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Salary Range</label>
                 <input
                   type="text"
-                  placeholder="e.g. $130,000 - $160,000"
+                  placeholder="e.g. ₹13,00,000 - ₹16,00,000"
                   value={jobSalary}
                   onChange={(e) => setJobSalary(e.target.value)}
                   className="p-3 bg-slate-50/50 dark:bg-navy-950/40 border border-slate-200 dark:border-navy-800/50 rounded-xl text-xs text-slate-800 dark:text-slate-200 outline-none focus:border-brand-500"

@@ -10,7 +10,7 @@ export const AboutPage = () => {
   ];
 
   const milestones = [
-    { year: "2024", title: "Inception & Seed funding", desc: "Scaffolded core parser architectures and secured $3.5M seed sourcing rounds." },
+    { year: "2024", title: "Inception & Seed funding", desc: "Scaffolded core parser architectures and secured ₹30 Crore seed sourcing rounds." },
     { year: "2025", title: "Smart Analyzer launch", desc: "Released standard drag-and-drop resume scanner modules parsing 400k candidates." },
     { year: "2026", title: "JobSphere Suite evolution", desc: "Unified dashboards into a single world-class interface linking Unstop-challenges." }
   ];

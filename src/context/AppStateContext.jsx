@@ -44,7 +44,7 @@ export const AppStateProvider = ({ children }) => {
       title: "Senior Product Architect",
       company: "Netflix",
       logo: "N",
-      salary: "$190,000 - $230,000",
+      salary: "₹19,00,000 - ₹23,00,000",
       skills: ["React", "Node.js", "GraphQL", "AWS"],
       location: "Los Gatos, CA (Remote)",
       department: "Engineering",
